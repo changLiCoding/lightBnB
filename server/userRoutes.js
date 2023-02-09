@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 
+
 module.exports = function(router, database) {
 
   // Create a new user
