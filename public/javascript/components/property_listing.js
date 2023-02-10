@@ -28,7 +28,15 @@ $(() => {
             ${needReservationForm ?
               `
               <div class="property-listing__reservation">
-                <form class="property-listing__reservation__form" method="post" action="/api/reservations">
+                <form
+                name="${property.id}-reservation-form"
+                class="property-listing__reservation__form" method="post" action="/api/reservations">
+                  <label for="start">Start date:</label>
+
+                  <input type="date" id="start" name="start_date" value="2023-01-01" min="2023-01-01" required>
+                 <label for="start">End date:</label>
+
+                  <input type="date" id="start" name="end_date" value="2023-01-01" min="2023-01-01" required>
                   <button type="submit">Make Reservation</button>
                 </form>
               </div>

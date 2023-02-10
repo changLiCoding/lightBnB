@@ -116,7 +116,6 @@ const getAllReservations = function(guest_id, limit = 10) {
 
   return pool.query(allReservationQuery, sqlParams)
     .then(res => {
-      console.log(res.rows);
       return res.rows;
     }).catch(err => {
       console.error(err.message);
@@ -187,7 +186,6 @@ const getAllProperties = function(options, limit = 10) {
 
   return pool.query(queryString, queryParams)
     .then((res) => {
-      console.log(res.rows);
       return res.rows;
     })
     .catch(err => console.error('query error', err.stack));
