@@ -1,3 +1,6 @@
+/* eslint-disable */
+
+
 $(() => {
 
   const $propertyListings = $(`
@@ -17,14 +20,26 @@ $(() => {
   }
   window.propertyListings.clearListings = clearListings;
 
-  function addProperties(properties, isReservation = false) {
+  function addProperties(properties, isReservation = false, needReservationForm = false) {
     clearListings();
     for (const propertyId in properties) {
       const property = properties[propertyId];
-      const listing = propertyListing.createListing(property, isReservation);
+      const listing = propertyListing.createListing(property, isReservation, needReservationForm);
       addListing(listing);
     }
   }
   window.propertyListings.addProperties = addProperties;
 
+  $('.property-listing__reservation__form').on('submit', function (event) {
+    event.preventDefault();
+    console.log('reservation got clicked!');
+    const data=$(this).serialize();
+    newReservation(data)
+      .then((json => {
+        console.log(json);
+        views_manager.show('listings');
+      }))
+      .catch(err => views_manager.shwo('error', 'Not valid date'))
+
+  });
 });

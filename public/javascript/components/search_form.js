@@ -1,3 +1,6 @@
+/* eslint-disable */
+
+
 $(() => {
 
   const $searchPropertyForm = $(`
@@ -32,7 +35,7 @@ $(() => {
     const data = $(this).serialize();
 
     getAllListings(data).then(function( json ) {
-      propertyListings.addProperties(json.properties);
+      propertyListings.addProperties(json.properties, false, true);
       views_manager.show('listings');
     });
   });

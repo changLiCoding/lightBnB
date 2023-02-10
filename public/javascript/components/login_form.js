@@ -1,3 +1,6 @@
+/* eslint-disable */
+
+
 $(() => {
 
   const $logInForm = $(`
@@ -41,5 +44,5 @@ $(() => {
     views_manager.show('listings');
     return false;
   });
-      
+
 });

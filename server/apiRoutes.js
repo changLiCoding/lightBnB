@@ -9,6 +9,8 @@ module.exports = function(router, database) {
       });
   });
 
+
+
   router.get('/reservations', (req, res) => {
     const userId = req.session.userId;
     if (!userId) {
@@ -22,6 +24,7 @@ module.exports = function(router, database) {
         res.send(e);
       });
   });
+
 
   router.post('/properties', (req, res) => {
     const userId = req.session.userId;

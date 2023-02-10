@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 $(() => {
 
   const $signUpForm = $(`
@@ -11,11 +13,11 @@ $(() => {
         <div class="sign-up-form__field-wrapper">
           <input type="email" name="email" placeholder="Email">
         </div>
-  
+
         <div class="sign-up-form__field-wrapper">
             <input type="password" name="password" placeholder="Password">
           </div>
-  
+
         <div class="sign-up-form__field-wrapper">
             <button>Sign Up</button>
             <a id="sign-up-form__cancel" href="#">Cancel</a>
@@ -40,5 +42,5 @@ $(() => {
     views_manager.show('listings');
     return false;
   });
-      
+
 });

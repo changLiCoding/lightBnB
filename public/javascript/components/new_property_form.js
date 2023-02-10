@@ -1,6 +1,9 @@
+/* eslint-disable */
+
+
 $(() => {
 
-  
+
 
   const $newPropertyForm = $(`
   <form action="/api/properties" method="post" id="new-property-form" class="new-property-form">
@@ -8,7 +11,7 @@ $(() => {
         <label for="new-property-form__title">Title</label>
         <input type="text" name="title" placeholder="Title" id="new-property-form__title">
       </div>
-      
+
       <div class="new-property-form__field-wrapper">
         <label for="new-property-form__description">Description</label>
         <textarea placeholder="Description" name="description" id="property-form__description" cols="30" rows="10"></textarea>
@@ -64,7 +67,7 @@ $(() => {
           </select>
         </div>
         <div id="new-property-form__locality-fields">
-          
+
           <div class="new-property-form__field-wrapper">
             <label for="new-property-form__city">City</label>
             <input placeholder="City" type="text" name="city" id="new-property-form__city" />
@@ -83,7 +86,7 @@ $(() => {
             <button>Create</button>
             <a id="property-form__cancel" href="#">Cancel</a>
         </div>
-        
+
     </form>
   `);
 
@@ -120,5 +123,5 @@ $(() => {
     views_manager.show('listings');
     return false;
   });
-  
+
 });

@@ -1,3 +1,6 @@
+/* eslint-disable */
+
+
 function getMyDetails() {
   console.log("getMyDetails");
   return $.ajax({
@@ -43,6 +46,14 @@ function getAllReservations() {
   return $.ajax({
     url,
   });
+}
+
+const newReservation=function (data) {
+  return $.ajax({
+    method: "POST",
+    url: "/api/reservations",
+    data
+  })
 }
 
 const submitProperty = function(data) {

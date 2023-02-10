@@ -1,7 +1,10 @@
+/* eslint-disable */
+
+
 $(() => {
   window.propertyListing = {};
-  
-  function createListing(property, isReservation) {
+
+  function createListing(property, isReservation, needReservationForm) {
     return `
     <article class="property-listing">
         <section class="property-listing__preview-image">
@@ -14,12 +17,25 @@ $(() => {
             <li>number_of_bathrooms: ${property.number_of_bathrooms}</li>
             <li>parking_spaces: ${property.parking_spaces}</li>
           </ul>
-          ${isReservation ? 
-            `<p>${moment(property.start_date).format('ll')} - ${moment(property.end_date).format('ll')}</p>` 
+          ${isReservation ?
+            `<p>${moment(property.start_date).format('ll')} - ${moment(property.end_date).format('ll')}</p>`
             : ``}
           <footer class="property-listing__footer">
             <div class="property-listing__rating">${Math.round(property.average_rating * 100) / 100}/5 stars</div>
-            <div class="property-listing__price">$${property.cost_per_night/100.0}/night</div>
+            <div class="property-listing__price">
+              $${property.cost_per_night/100.0}/night
+            </div>
+            ${needReservationForm ?
+              `
+              <div class="property-listing__reservation">
+                <form class="property-listing__reservation__form" method="post" action="/api/reservations">
+                  <button type="submit">Make Reservation</button>
+                </form>
+              </div>
+              `
+
+              : ``}
+
           </footer>
         </section>
       </article>

@@ -99,7 +99,7 @@ exports.addUser = addUser;
 const getAllReservations = function(guest_id, limit = 10) {
 
   const allReservationQuery = `
-    SELECT reservations.*, properties.*, AVG(rating) as average_rating
+    SELECT reservations.*, properties.*, properties.cost_per_night / 100 as cost_per_night, AVG(rating) as average_rating
     FROM reservations
 
     JOIN properties
@@ -148,7 +148,7 @@ const getAllProperties = function(options, limit = 10) {
   // 3
   if (options.city) {
     queryParams.push(`%${options.city}%`);
-    queryString += `And city iLIKE $${queryParams.length} `;
+    queryString += `AND city iLIKE $${queryParams.length} `;
   }
 
   if (options.minimum_price_per_night) {
@@ -186,7 +186,8 @@ const getAllProperties = function(options, limit = 10) {
   // 5
 
   return pool.query(queryString, queryParams)
-    .then((res)=>{
+    .then((res) => {
+      console.log(res.rows);
       return res.rows;
     })
     .catch(err => console.error('query error', err.stack));
