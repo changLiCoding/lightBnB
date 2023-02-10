@@ -201,31 +201,26 @@ exports.getAllProperties = getAllProperties;
  * @return {Promise<{}>} A promise to the property.
  */
 const addProperty = function(property) {
-  let queryAttr;
-  let queryValues;
 
-  for (const key in property) {
-    console.log(key, property[key]);
-    if (property[key]) {
-      if (!queryAttr) {
-        queryAttr = key;
-        queryValues = property[key];
-      } else {
-        queryAttr += `, ${key}`;
-        queryValues += `, ${property[key]}`;
-      }
+  const sqlParams = Object.values(property);
+  const dollarIndex = sqlParams.reduce((preV, curV, index) => {
+    if (index === 0) {
+      curV = `$${index + 1}`;
+    } else {
+      curV = `, $${index + 1}`;
     }
-  }
-
-
-
+    preV += curV;
+    return preV;
+  }, '');
   const addPropertyQuery = `
-  INSERT INTO properties (${queryAttr}) VALUES(${queryValues})
+  INSERT INTO properties (title, description, number_of_bedrooms, number_of_bathrooms, parking_spaces, cost_per_night, thumbnail_photo_url, cover_photo_url, street, country, city, province, post_code, owner_id) VALUES(${dollarIndex})
   RETURNING *
   ;
   `;
   console.log(addPropertyQuery);
-
+  pool.query(addPropertyQuery, sqlParams)
+    .then(res => console.log(res.rows))
+    .catch(err => console.error(err.message));
   // const propertyId = Object.keys(properties).length + 1;
   // property.id = propertyId;
   // properties[propertyId] = property;
